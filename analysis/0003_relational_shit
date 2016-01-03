@@ -1,0 +1,19 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import migrations, models
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('ui', '0002_auto_20151117_2113'),
+    ]
+
+    operations = [
+        migrations.AlterField(
+            model_name='exerciseset',
+            name='workout',
+            field=models.ForeignKey(related_name='sets', to='ui.Workout', null=True),
+        ),
+    ]

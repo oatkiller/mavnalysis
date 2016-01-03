@@ -1,0 +1,23 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<div>
+			{{ workout.workout_text }}
+			<ul>
+			{% for set in workout.sets.all %}
+				<li>
+					<span>
+						{{ set.exerciseName }}
+					</span>
+					<span>
+						{% if set.weight == 0  %}
+							Bodyweight
+							{% else %}{{ set.weight }}{% if set.isLbs %}lbs{% else %}kg{% endif %}{% endif %}x{{ set.reps }}
+					</span>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</body>
+</html>
