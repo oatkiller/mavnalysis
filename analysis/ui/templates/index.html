@@ -1,13 +1,39 @@
 <html>
 	<head>
+		<title>MavNalysis</title>
 	</head>
 	<body>
-		<ol>
-			{% for workout in workouts %}
-			<li>
-				<a href="/workouts/{{workout.id}}">{{ workout.date }}</a>
-			</li>
-			{% endfor %}
-		</ol>
+		<div style="float: left;">
+			<h1>Workouts</h1>
+			<ol>
+				{% for workout in workouts %}
+				<li>
+					<a href="/workouts/{{workout.id}}">{{ workout.date }}</a>
+				</li>
+				{% endfor %}
+			</ol>
+		</div>
+
+		<div style="float: left; margin: 10%;">
+			<h1 style="text-align: middle;"> Mav's Whiteboard </h1>
+			<table style="border: 1px black solid;">
+				<tr style="border-bottom: 1px black dotted;">
+					<th>Exercise</th>
+					<th>1</th>
+					<th>2</th>
+					<th>3</th>
+					<th>4</th>
+					<th>5</th>
+				</tr>
+				{% for pr in prs %}
+				<tr>
+					<td> {{ pr.name }} </td>
+					{% for p in pr.prs %}
+					<td title="{{ p.date }}"> {{ p.weight }} </td>
+					{% endfor %}
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
 	</body>
 </html>
