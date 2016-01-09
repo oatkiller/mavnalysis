@@ -52,9 +52,12 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+		'ui.middleware.LoginRequiredMiddleware',
 )
 
 ROOT_URLCONF = 'ui.urls'
+LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL = '/'
 
 TEMPLATES = [
     {

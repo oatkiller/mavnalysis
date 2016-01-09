@@ -13,7 +13,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-
 class Posts(models.Model):
     post_author = models.BigIntegerField(blank=True, null=True)
     post_date = models.DateTimeField(blank=True, null=True)
@@ -47,6 +46,7 @@ class Workout(models.Model):
 	workout_text = models.CharField(max_length=19000, blank=True, null=True)
 	has_pr = models.BooleanField(default=False)	
 	comments = models.CharField(max_length=10000, default="")
+	user = models.ForeignKey(User, blank=False, null=True)
 
 class ExerciseSet(models.Model):
 	date = models.DateTimeField(blank=True, null=True)

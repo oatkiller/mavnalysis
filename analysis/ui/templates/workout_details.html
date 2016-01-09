@@ -4,6 +4,7 @@
 	<body>
 		<div>
 			{{ workout.workout_text }}
+
 			<ul>
 			{% for set in workout.sets.all %}
 				<li>
@@ -18,6 +19,9 @@
 				</li>
 				{% endfor %}
 			</ul>
+			<div>
+				<a href="/workouts/{{workout.id}}/add">Add New set</a>
+			</div>
 		</div>
 	</body>
 </html>

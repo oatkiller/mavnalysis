@@ -16,11 +16,13 @@ def get_highest_pr(queryset):
 	else:
 		return kgs_pr
 
-def generate_pr_entry (exerciseName, reps):
-	queryset = ExerciseSet.objects.\
-		filter(exerciseName=exerciseName).\
-		filter(reps__gte=reps).\
+def generate_pr_entry (exerciseName, reps, user):
+	queryset = (ExerciseSet.objects.
+		filter(user=user).
+		filter(exerciseName=exerciseName).
+		filter(reps__gte=reps).
 		order_by('-weight')
+	)
 
 	pr = get_highest_pr(queryset)	
 	if pr != None:
@@ -37,18 +39,18 @@ def generate_pr_entry (exerciseName, reps):
 			'date'   : None
 		}
 
-def generate_pr_entries (exerciseNames, reps):
+def generate_pr_entries (exerciseNames, reps, user):
 	result = []
 	for exerciseName in exerciseNames:
 		pr = {
 			'name' : exerciseName,
-			'prs' : [generate_pr_entry(exerciseName, rep) for rep in reps]
+			'prs' : [generate_pr_entry(exerciseName, rep, user) for rep in reps]
 		}
 		result.append(pr)
 	return result
 
 def get_prs(request=None, reps=range(1,6)):
-	if (request == None) :
+	if request is None:
 		return []
 	
 	exerciseNames = [
@@ -56,7 +58,8 @@ def get_prs(request=None, reps=range(1,6)):
 		"Front Squat",
 		"Clean and Jerk",
 		"Snatch",
-		"Flat Bench"
+		"Flat Bench",
+		"Overhead Press"
 	]
-	
-	return generate_pr_entries(exerciseNames, reps)
+
+	return generate_pr_entries(exerciseNames, reps, request.user)
